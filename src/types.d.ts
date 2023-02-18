@@ -13,3 +13,12 @@ export type step =
           type: 'END';
         }
     );
+
+export type Tplan = 'arcade' | 'advanced' | 'pro';
+export type Tduration = 'monthly' | 'yearly';
+
+export interface TplanOption {
+  name: Tplan;
+  price: number;
+  icon: string;
+}
