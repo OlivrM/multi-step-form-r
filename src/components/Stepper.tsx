@@ -16,9 +16,9 @@ export interface formState {
   phone: string;
   plan: Tplan;
   planDuration: Tduration;
-  withOnlineService: boolean;
-  withLargerStorage: boolean;
-  withCustomizableProfile: boolean;
+  'Online service': boolean;
+  'Larger storage': boolean;
+  'Customizable profile': boolean;
 }
 
 const Stepper = ({ steps, setCurrentStep, currentStep }: StepperProps) => {
@@ -38,9 +38,9 @@ const Stepper = ({ steps, setCurrentStep, currentStep }: StepperProps) => {
       phone: '',
       plan: 'arcade',
       planDuration: 'monthly',
-      withCustomizableProfile: false,
-      withLargerStorage: false,
-      withOnlineService: false,
+      'Online service': false,
+      'Larger storage': false,
+      'Customizable profile': false,
     },
   });
 

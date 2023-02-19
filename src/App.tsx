@@ -1,14 +1,16 @@
-import type { step } from 'types';
-
+import { useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
+
 import Step1 from './components/Step1';
 import Step2 from './components/Step2';
 import Step3 from './components/Step3';
+import Step4 from './components/Step4';
 import Stepper from './components/Stepper';
 
+// TYPES
+import type { step } from 'types';
 // CSS IMAGES
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
 import bgV from './assets/images/bg-sidebar-desktop.svg';
 
 const stepData: step[] = [
@@ -37,7 +39,7 @@ const stepData: step[] = [
     type: 'STEP',
     title: 'Finishing up',
     resume: 'Double-check everything looks OK before confirming.',
-    component: <div>step4</div>,
+    component: <Step4 />,
     buttonTag: 'summary',
   },
   {

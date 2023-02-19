@@ -19,6 +19,16 @@ export type Tduration = 'monthly' | 'yearly';
 
 export interface TplanOption {
   name: Tplan;
-  price: number;
+  price: {
+    [keyof in Tduration]: number;
+  };
   icon: string;
 }
+
+export type Taddon = {
+  name: 'Online service' | 'Larger storage' | 'Customizable profile';
+  definition: string;
+  price: {
+    [keyof in Tduration]: number;
+  };
+};

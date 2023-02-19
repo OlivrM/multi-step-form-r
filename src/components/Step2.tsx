@@ -1,3 +1,4 @@
+import React from 'react';
 import { Form } from 'react-bootstrap';
 import { useFormContext } from 'react-hook-form';
 import { TplanOption } from 'types';
@@ -6,31 +7,56 @@ import arcadeIcon from '../assets/images/icon-arcade.svg';
 import proIcon from '../assets/images/icon-pro.svg';
 import { formState } from './Stepper';
 
-const planData: TplanOption[] = [
+export const planData: TplanOption[] = [
   {
     name: 'arcade',
     icon: arcadeIcon,
-    price: 9,
+    price: {
+      monthly: 9,
+      yearly: 90,
+    },
   },
   {
     name: 'advanced',
-    price: 12,
+    price: {
+      monthly: 12,
+      yearly: 120,
+    },
     icon: advancedIcon,
   },
   {
     name: 'pro',
-    price: 15,
+    price: {
+      monthly: 12,
+      yearly: 120,
+    },
     icon: proIcon,
   },
 ];
 
 const Step2 = () => {
+  const { register, setValue, watch } = useFormContext<formState>();
+
+  const duration = register('planDuration');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.currentTarget.checked) {
+      setValue('planDuration', 'yearly');
+      return;
+    }
+    setValue('planDuration', 'monthly');
+  };
   return (
     <div>
       <Plans />
       <div className="hstack gap-4 text-capitalize  fw-bold p-3 justify-content-center bg-light mt-4 rounded-2">
         <span>monthly</span>
-        <Form.Switch className="m-0 checked" />
+        <Form.Switch
+          className="m-0 checked"
+          checked={watch('planDuration') === 'monthly' ? false : true}
+          onChange={handleChange}
+        />
+
         <span>yearly</span>
       </div>
     </div>
@@ -57,6 +83,8 @@ const Plan = ({ plan }: PlanProps) => {
   const planClass =
     watch('plan') === plan.name ? 'border border-primary bg-light' : 'border';
 
+  const duration = watch('planDuration');
+
   return (
     <div
       className={`vstack ${planClass} rounded-3 p-3 col-4 cursor-pointer`}
@@ -71,7 +99,9 @@ const Plan = ({ plan }: PlanProps) => {
         className="mb-5"
       />
       <p className="fw-bold mb-1 text-capitalize text-primary">{plan.name}</p>
-      <p className="text-secondary">{`$${plan.price}/mo`}</p>
+      <p className="text-secondary">{`$${plan.price[duration]}/${
+        duration === 'monthly' ? 'mo' : 'yr'
+      }`}</p>
     </div>
   );
 };
