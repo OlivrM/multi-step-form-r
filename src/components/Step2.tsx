@@ -37,7 +37,7 @@ export const planData: TplanOption[] = [
 const Step2 = () => {
   const { register, setValue, watch } = useFormContext<formState>();
 
-  const duration = register('planDuration');
+  register('planDuration');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.checked) {
@@ -56,7 +56,6 @@ const Step2 = () => {
           checked={watch('planDuration') === 'monthly' ? false : true}
           onChange={handleChange}
         />
-
         <span>yearly</span>
       </div>
     </div>
@@ -67,7 +66,7 @@ export default Step2;
 
 const Plans = () => {
   return (
-    <div className="hstack gap-4 p-2 w-100 ">
+    <div className="d-flex flex-column flex-md-row gap-2 p-2 w-100 ">
       {planData.map((plan) => (
         <Plan plan={plan} key={plan.name} />
       ))}
@@ -87,21 +86,27 @@ const Plan = ({ plan }: PlanProps) => {
 
   return (
     <div
-      className={`vstack ${planClass} rounded-3 p-3 col-4 cursor-pointer`}
+      className={`d-flex flex-md-column justify-content-beteewn ${planClass} rounded-3 p-3 gap-3 col-md-4 cursor-pointer`}
       onClick={() => setValue('plan', plan.name)}
       {...register('plan')}
     >
-      <img
-        src={plan.icon}
-        alt={`${plan.name} logo`}
-        width="50px"
-        height="50px"
-        className="mb-5"
-      />
-      <p className="fw-bold mb-1 text-capitalize text-primary">{plan.name}</p>
-      <p className="text-secondary">{`$${plan.price[duration]}/${
-        duration === 'monthly' ? 'mo' : 'yr'
-      }`}</p>
+      <div>
+        <img
+          src={plan.icon}
+          alt={`${plan.name} logo`}
+          width="50px"
+          height="50px"
+          className="mb-md-5 me-auto"
+        />
+      </div>
+      <div className="vstack lh-sm">
+        <span className="fw-bold mb-1 text-capitalize text-primary">
+          {plan.name}
+        </span>
+        <span className="text-secondary">{`$${plan.price[duration]}/${
+          duration === 'monthly' ? 'mo' : 'yr'
+        }`}</span>
+      </div>
     </div>
   );
 };
