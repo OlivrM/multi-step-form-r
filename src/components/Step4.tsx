@@ -1,13 +1,14 @@
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import { useFormContext } from 'react-hook-form';
-import { formState } from './Stepper';
+import { formState } from '../App';
+import { useApp } from '../store';
 
 import { planData } from './Step2';
 import { addonData } from './Step3';
 
 const Step4 = () => {
-  const { register, getValues } = useFormContext<formState>();
-
+  const { getValues } = useFormContext<formState>();
+  const setStep = useApp((state) => state.setStep);
   const {
     'Online service': onlineservice,
     'Larger storage': largerSorage,
@@ -16,17 +17,27 @@ const Step4 = () => {
     plan,
   } = getValues();
 
-  const planValue = planData.find((p) => p.name === plan)?.price[planDuration];
+  const planValue =
+    planData.find((p) => p.name === plan)?.price[planDuration] ?? 0;
   const duration = planDuration === 'monthly' ? 'mo' : 'yr';
-  const total = 0;
+
+  const ol = onlineservice ? addonData[0].price[planDuration] : 0;
+  const ls = largerSorage ? addonData[1].price[planDuration] : 0;
+  const cp = customProfile ? addonData[2].price[planDuration] : 0;
+
+  const total = planValue + ol + ls + cp;
 
   return (
-    <div className="p-2">
+    <>
       <ListGroup variant="flush" className="bg-light p-3 rounded-3">
         <ListGroupItem className="hstack bg-light py-4">
           <div className="vstack lh-sm">
-            <span className="text-primary fw-bold">{`Arcade(${planDuration})`}</span>
-            <a href="#">Change</a>
+            <span className="text-primary fw-bold">
+              <span className="text-capitalize">{plan}</span>({planDuration})
+            </span>
+            <a className="" onClick={() => setStep(1)}>
+              Change
+            </a>
           </div>
           <span className="fw-bold">{`$${planValue}/${duration}`}</span>
         </ListGroupItem>
@@ -34,21 +45,27 @@ const Step4 = () => {
           <div className="vstack gap-2">
             {onlineservice && (
               <div className="hstack lh-sm justify-content-between">
-                <span className="text-secondary">Online service(monthly)</span>
+                <span className="text-secondary">
+                  Online service({planDuration})
+                </span>
                 <span>{`+${addonData[0].price[planDuration]}/${duration}`}</span>
               </div>
             )}
 
             {largerSorage && (
               <div className="hstack lh-sm justify-content-between">
-                <span className="text-secondary">Arcade(monthly)</span>
+                <span className="text-secondary">
+                  Larger storage({planDuration})
+                </span>
                 <span>{`+${addonData[1].price[planDuration]}/${duration}`}</span>
               </div>
             )}
 
             {customProfile && (
               <div className="hstack lh-sm justify-content-between">
-                <span className="text-secondary">Arcade(monthly)</span>
+                <span className="text-secondary">
+                  Customizable profile({planDuration})
+                </span>
                 <span>{`+${addonData[2].price[planDuration]}/${duration}`}</span>
               </div>
             )}
@@ -61,7 +78,7 @@ const Step4 = () => {
           <span>{`${total}/${duration}`}</span>
         </div>
       </ListGroupItem>
-    </div>
+    </>
   );
 };
 

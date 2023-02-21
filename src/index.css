@@ -13,7 +13,22 @@
   font-weight: bold;
 }
 
+
+:root {
+  --t1 : hsl(213, 96%, 18%);
+  --t2 : hsl(243, 100%, 62%);
+  --t3 : hsl(228, 100%, 84%);
+  --t4 : hsl(206, 94%, 87%);
+  --t5 : hsl(354, 84%, 57%);
+--l1: hsl(231, 11%, 63%);
+--l2: hsl(229, 24%, 87%);
+--l3: hsl(217, 100%, 97%);
+--l4: hsl(231, 100%, 99%);
+--l5: hsl(0, 0%, 100%);
+}
+
 body {
-  background-color: red;
+  background-color: var(--l3);
   font-family: 'Ubuntu', sans-serif;
 }
+

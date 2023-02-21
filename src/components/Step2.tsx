@@ -2,10 +2,10 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 import { useFormContext } from 'react-hook-form';
 import { TplanOption } from 'types';
+import { formState } from '../App';
 import advancedIcon from '../assets/images/icon-advanced.svg';
 import arcadeIcon from '../assets/images/icon-arcade.svg';
 import proIcon from '../assets/images/icon-pro.svg';
-import { formState } from './Stepper';
 
 export const planData: TplanOption[] = [
   {
@@ -18,19 +18,19 @@ export const planData: TplanOption[] = [
   },
   {
     name: 'advanced',
+    icon: advancedIcon,
     price: {
       monthly: 12,
       yearly: 120,
     },
-    icon: advancedIcon,
   },
   {
     name: 'pro',
+    icon: proIcon,
     price: {
       monthly: 12,
       yearly: 120,
     },
-    icon: proIcon,
   },
 ];
 

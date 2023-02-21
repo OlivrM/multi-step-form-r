@@ -2,7 +2,7 @@ import { FormGroup } from 'react-bootstrap';
 import FormCheckInput from 'react-bootstrap/esm/FormCheckInput';
 import { useFormContext } from 'react-hook-form';
 import { Taddon } from 'types';
-import { formState } from './Stepper';
+import { formState } from '../App';
 
 export const addonData: Taddon[] = [
   {
@@ -33,7 +33,7 @@ export const addonData: Taddon[] = [
 
 const Step3 = () => {
   return (
-    <div className="p-2 vstack gap-3">
+    <div className="vstack gap-3">
       {addonData.map((addon) => (
         <Addon {...addon} key={addon.name} />
       ))}

@@ -1,13 +1,14 @@
 export type step =
   | {
-      type: 'START' | 'STEP' | 'END';
-      component: React.ReactNode;
+      type: 'START' | 'STEP' | 'LAST' | 'END';
+      component: JSX.Element<>;
     } & (
       | {
-          type: 'START' | 'STEP';
+          type: 'START' | 'STEP' | 'LAST';
           title: string;
           resume?: string;
           buttonTag: string;
+          validation?: string[];
         }
       | {
           type: 'END';
