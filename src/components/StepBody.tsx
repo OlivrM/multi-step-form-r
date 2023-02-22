@@ -1,19 +1,19 @@
 import { step } from 'types';
 
-interface StepperProps {
+interface StepBodyProps {
   step: step;
 }
 
-const Stepper = ({ step }: StepperProps) => {
+const StepBody = ({ step }: StepBodyProps) => {
   return (
-    <div className="">
+    <div>
       <StepHeader step={step} />
       <step.component />
     </div>
   );
 };
 
-export default Stepper;
+export default StepBody;
 
 interface StepHeaderProps {
   step: step;
