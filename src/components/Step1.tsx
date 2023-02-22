@@ -4,10 +4,8 @@ import { formState } from '../App';
 
 const REQUIIRED_FIELD = 'this field is required';
 
-type field = Pick<formState, 'name' | 'email' | 'phone'>;
-
 interface IFormData {
-  name: keyof field;
+  name: keyof Pick<formState, 'name' | 'email' | 'phone'>;
   label: string;
   type: string;
   placeholder?: string;
@@ -39,7 +37,7 @@ const Step1 = ({}) => {
   return (
     <div className="p-2">
       {personalFormData.map((data) => (
-        <Form.Group className="pb-3 position-relative">
+        <Form.Group className="pb-3 position-relative" key={`form${data.name}`}>
           <Form.Label htmlFor={data.name} className="text-capitalize">
             {data.name}
           </Form.Label>
