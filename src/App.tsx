@@ -3,57 +3,20 @@ import { Button, Col, Container, Row } from 'react-bootstrap';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 
 // CUSTOM LIB
-import Step1 from './components/Step1';
-import Step2 from './components/Step2';
-import Step3 from './components/Step3';
-import Step4 from './components/Step4';
-import Step5 from './components/Step5';
-import Stepper from './components/Stepper';
+
+import StepBody from './components/StepBody';
 import { useApp } from './store';
 
 // TYPES
-import type { step, Tduration, Tplan } from 'types';
+import type { Tduration, Tplan } from 'types';
 
 // CSS IMAGES
 import 'bootstrap/dist/css/bootstrap.min.css';
 import bgV from './assets/images/bg-sidebar-desktop.svg';
 import bgMobile from './assets/images/bg-sidebar-mobile.svg';
 
-const stepData: step[] = [
-  {
-    type: 'START',
-    title: 'Personal info',
-    resume: 'Please provide your name, email address, and phone number.',
-    component: Step1,
-    buttonTag: 'your info',
-    validation: ['name', 'email', 'phone'],
-  },
-  {
-    type: 'STEP',
-    title: 'Select your plan',
-    resume: 'You have the option of monthly or yearly billing.',
-    component: Step2,
-    buttonTag: 'select plan',
-  },
-  {
-    type: 'STEP',
-    title: 'Pick add-ons',
-    resume: 'Add-ons help enhance your gaming experience..',
-    component: Step3,
-    buttonTag: 'add-ons',
-  },
-  {
-    type: 'LAST',
-    title: 'Finishing up',
-    resume: 'Double-check everything looks OK before confirming.',
-    component: Step4,
-    buttonTag: 'summary',
-  },
-  {
-    type: 'END',
-    component: Step5,
-  },
-];
+// DATA
+import { stepData } from './data';
 
 export interface formState {
   name: string;
@@ -103,11 +66,11 @@ function App() {
   return (
     <FormProvider {...methods}>
       <div
-        className="d-flex  flex-column d-md-grid h-75 position-relative"
+        className="d-flex  flex-column d-md-grid  position-relative"
         style={{ placeItems: 'center', minHeight: '100vh' }}
       >
         <ul
-          className="hstack flex-md-column d-md-none gap-2 p-3 pt-md-5 pt-2 w-100 position-absolute justify-content-center justify-content-md-start rounded-3"
+          className="hstack flex-md-column d-md-none gap-2 p-3 pt-md-5 pt-2 w-100 position-absolute justify-content-center justify-content-md-start"
           style={{
             backgroundImage: `url(${bgMobile})`,
             objectFit: 'cover',
@@ -142,9 +105,9 @@ function App() {
               );
           })}
         </ul>
-        <Container style={{ maxWidth: '968px' }} className="h-75">
-          <Row className=" bg-white rounded-3 p3 h-100">
-            <Col md="4" className="p-md-3 p-0  d-md-block">
+        <Container style={{ maxWidth: '968px' }} className="mainContainer">
+          <Row className="bg-white rounded-3 p-0 p-md-3 m-2 m-md-0 h-100 sm-shadow">
+            <Col md="4" className="d-none d-md-block">
               <ul
                 className="hstack flex-md-column gap-2 p-3 pt-md-5 pt-2 h-100 justify-content-center justify-content-md-start rounded-3"
                 style={{
@@ -185,8 +148,11 @@ function App() {
                 })}
               </ul>
             </Col>
-            <Col className="pt-md-5 m-3 p-3 d-flex rounded-md-3 rounded-0 flex-column rounded-3  shadow">
-              <Stepper step={step} />
+            <Col
+              className="pt-md-5  p-3 d-flex rounded-md-3 rounded-0 flex-column rounded-3 mx-auto"
+              style={{ maxWidth: '440px' }}
+            >
+              <StepBody step={step} />
               <div className="hstack justify-content-between mt-auto d-md-flex d-none">
                 {currentStep > 0 && step.type !== 'END' && (
                   <Button
