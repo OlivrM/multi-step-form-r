@@ -12,11 +12,10 @@ This is a solution to the [Multi-step form challenge on Frontend Mentor](https:/
     - [Links](#links)
   - [My process](#my-process)
     - [Built with](#built-with)
-    - [What I learned](#what-i-learned)
     - [Continued development](#continued-development)
   - [Author](#author)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
+
 
 ## Overview
 
@@ -55,35 +54,11 @@ Users should be able to:
 - Typescript
 
 
-
-### What I learned
-
-Theire is many way to solve this challenge.
-- with router an a global store ( redux , context ...) 
-
-But i like to try the FormContext.
-
-First i use Zustand.
-
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
-}
-```
-
-
 ### Continued development
 
 - Finished the mobile version.
-- customize the color to match the design.
+- customize bootstrap to match the color the design.
+- 
 
 ## Author
 
